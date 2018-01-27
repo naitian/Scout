@@ -1,0 +1,14 @@
+{
+    "name": "Scope",
+    "description" : "Search for objects in videos",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": ["*://*.youtube.com/*"],
+            "css": ["styles.css"],
+            "js": ["script.js"],
+            "run_at": "document_end"
+        }
+    ]
+}

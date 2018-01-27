@@ -1,11 +1,15 @@
-import os
 import boto3
-import youtube_dl
+import cv2
+from datetime import datetime
+import os
 import scenedetect
 import scenedetect.manager
 import scenedetect.detectors
-import cv2
+import youtube_dl
 
+def get_current_time_string():
+    timestamp = datetime.now()
+    return '%i_%i_%i' % (timestamp.hour, timestamp.minute, timestamp.second)
 
 def get_absolute_path(relative_path):
     script_dir = os.path.dirname(__file__)
@@ -13,6 +17,7 @@ def get_absolute_path(relative_path):
 
 
 def download_url(url, hook=None):
+    print('Start download video - %s' % get_current_time_string())
     if url is not list:
         url = [url]
     ydl_opts = {
@@ -69,14 +74,13 @@ def update_video_index(url, title, framerate):
 def get_images(url):
     def finished(d):
         if d['status'] == 'finished':
+            print('End download video - %s' % get_current_time_string())
             video_path = os.path.split(d['filename'])[-1]
             print(video_path)
             os.makedirs(get_absolute_path(os.path.join('.', 'frames', '{}').format(video_path)), exist_ok=True)
             framerate, scene_list = get_frame_timestamps_stupid(video_path)
-            print('framerate', framerate)
             update_video_index(url, video_path, framerate)
             write_frames_from_list(video_path, scene_list)
-
     download_url(url, hook=finished)
 
 

@@ -42,11 +42,12 @@ def list_pngs(video_title: str) -> list:
     png_files = sorted(png_files, key=lambda s: int(s[5:-4]))
     return png_files
 
-def get_labels_for_video(video_title: str) -> dict:
+def get_labels_for_video(video_title: str, framerate: int) -> dict:
     """Label all provided frames for video.
 
     Args:
         video_title: name of video file
+        framerate: framerate of video
 
     Returns:
         Map of label to list of times label appeared in video
@@ -55,7 +56,7 @@ def get_labels_for_video(video_title: str) -> dict:
     label_times = {}
     for f in frames:
         message = rekognize_objects_in_frame(video_title, f)
-        seconds = int(f[5:-4]) / 24
+        seconds = int(f[5:-4]) / framerate
         minutes = seconds // 60
         display_seconds = seconds - minutes * 60
         labels = [label['Name'] for label in message['Labels']]
@@ -68,4 +69,4 @@ def get_labels_for_video(video_title: str) -> dict:
     
 if __name__ == '__main__':
     video_title = "It's Tentacle Time! -- Mind Blow #112.mp4"
-    print(get_labels_for_video(video_title))
+    print(get_labels_for_video(video_title, 24))

@@ -2115,22 +2115,15 @@ class FuzzySearch {
     }
 }
 
-const filter = (term, response) => {
-    return response(['hello', 'goodbye']);
-};
-
 const seek = (e) => {
-    console.log(e);
     videoPlayer.currentTime = e.target.dataset.timestamp - 0.6;
 };
 
 const suggest = (e, fzsch) => {
     term = e.target.value;
-    console.log(term);
     let suggestions = [];
 
     suggestions = fzsch.search(term);
-    console.log(suggestions);
 
     suggestions_output = document.querySelector('#scope-search #search-suggestions');
     if (suggestions.length > 0) {
@@ -2138,7 +2131,13 @@ const suggest = (e, fzsch) => {
         e.target.classList.add('suggestions');
         suggestions_output.innerHTML = '';
         for (var i = 0, len = suggestions.length; i < len; i++) {
-            suggestions_output.innerHTML += `<div>${suggestions[i].keyword} ${suggestions[i].timestamps.map(val => `<a data-timestamp="${val}">${val}</a>`).join(' ')}</div>`;
+            suggestions_output.innerHTML += `
+                <div class="search-results">
+                    ${suggestions[i].keyword}
+                    <span class="timestamps">
+                        ${suggestions[i].timestamps.map(val => `<a data-timestamp="${val}">${val}</a>`).join(' ')}
+                    </span>
+                </div>`;
         }
         // suggestions_output.innerText = suggestions;
     } else {

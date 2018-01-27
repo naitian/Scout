@@ -24,6 +24,7 @@ def download_url(url, hook=None):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
 
+
 def update_video_index(url, title, framerate):
     dynamodb_client = boto3.client('dynamodb')
     tables_list = dynamodb_client.list_tables()
@@ -74,8 +75,8 @@ def get_images(url):
             framerate, scene_list = get_frame_timestamps_stupid(video_path)
             print('framerate', framerate)
             update_video_index(url, video_path, framerate)
-            write_frames_from_list(video_path, scene_list)  
-    
+            write_frames_from_list(video_path, scene_list)
+
     download_url(url, hook=finished)
 
 

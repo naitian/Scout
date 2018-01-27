@@ -1,8 +1,8 @@
 import boto3
-import json
 import os
 
 rekognition_client = boto3.client('rekognition')
+
 
 def rekognize_objects_in_frame(video_title: str, frame_title: str) -> object:
     """Detect labels using AWS Rekognition.
@@ -26,6 +26,7 @@ def rekognize_objects_in_frame(video_title: str, frame_title: str) -> object:
     )
     return response
 
+
 def list_pngs(video_title: str) -> list:
     """List png frame files for a video.
 
@@ -41,6 +42,7 @@ def list_pngs(video_title: str) -> list:
     png_files = [f for f in files if os.path.splitext(f)[1] == '.png']
     png_files = sorted(png_files, key=lambda s: int(s[5:-4]))
     return png_files
+
 
 def get_labels_for_video(video_title: str, framerate: int) -> dict:
     """Label all provided frames for video.
@@ -66,7 +68,7 @@ def get_labels_for_video(video_title: str, framerate: int) -> dict:
             label_times[label].append(seconds)
         print(minutes, ':', display_seconds, '|', ' '.join(labels))
     return label_times
-    
+
 if __name__ == '__main__':
     video_title = "It's Tentacle Time! -- Mind Blow #112.mp4"
     print(get_labels_for_video(video_title, 24))

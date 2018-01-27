@@ -1,3 +1,7 @@
+# Frame and Video Directories
+backend/frames/
+backend/videos/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

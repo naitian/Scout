@@ -19,311 +19,2127 @@ class FuzzySearch {
     }
 
     fetchKeywords () {
-        let terms = {
-            'Nature': [3.0, 6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 36.0, 42.0, 45.0, 63.0, 66.0, 87.0, 93.0, 96.0, 99.0, 105.0, 114.0, 117.0, 159.0],
-            'Weed': [75.0],
-            'Mosque': [135.0],
-            'Mammal': [30.0, 33.0, 39.0, 45.0, 48.0, 78.0, 81.0, 84.0, 87.0, 105.0, 108.0, 111.0, 129.0, 156.0],
-            'Sycamore': [12.0, 24.0, 75.0],
-            'Night': [0.0, 66.0, 138.0],
-            'Forest': [6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 66.0, 159.0],
-            'Anther': [72.0],
-            'Pottery': [75.0, 132.0, 138.0],
-            'Crab': [141.0],
-            'Coyote': [105.0, 129.0],
-            'Arachnid': [123.0],
-            'Snorkeling': [84.0],
-            'Ground': [42.0, 69.0, 99.0, 123.0, 132.0, 147.0],
-            'Hedge': [9.0],
-            'Person': [39.0, 69.0, 84.0, 165.0],
-            'Vessel': [87.0],
-            'Lighting': [138.0, 162.0, 165.0],
-            'Ruins': [135.0],
-            'Zoo': [126.0],
-            'Sea': [36.0, 63.0, 87.0, 99.0, 114.0, 117.0],
-            'Jaguar': [156.0],
-            'Neighborhood': [135.0],
-            'Beak': [57.0, 60.0, 72.0, 102.0],
-            'Antelope': [108.0],
-            'Arch': [51.0],
-            'Farm': [96.0],
-            'Wilderness': [99.0],
-            'Navy': [87.0],
-            'Cactus': [120.0],
-            'Sprout': [66.0],
-            'Architecture': [51.0, 60.0, 135.0],
-            'Flower Bouquet': [75.0],
-            'Pizza': [141.0],
-            'Outdoors': [0.0, 3.0, 6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 36.0, 39.0, 42.0, 45.0, 51.0, 63.0, 66.0, 75.0, 78.0, 81.0, 87.0, 93.0, 96.0, 99.0, 105.0, 114.0, 117.0, 123.0, 132.0, 138.0, 141.0, 156.0, 159.0],
-            'Heron': [54.0, 150.0],
-            'Flying': [57.0],
-            'Text': [165.0],
-            'Urban': [51.0, 60.0, 135.0, 138.0],
-            'Lasagna': [141.0],
-            'Swallow': [54.0, 57.0],
-            'Ostrich': [93.0],
-            'Spotlight': [162.0, 165.0],
-            'Coast': [36.0],
-            'Tree': [6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 66.0, 75.0, 138.0, 159.0],
-            'Crane Bird': [54.0, 150.0],
-            'Leaf': [24.0, 72.0],
-            'Temple': [135.0],
-            'Surfing': [114.0],
-            'Steeple': [60.0],
-            'Winter': [39.0, 42.0, 81.0],
-            'Gemstone': [99.0],
-            'Animal': [30.0, 33.0, 36.0, 39.0, 42.0, 45.0, 48.0, 51.0, 54.0, 57.0, 60.0, 63.0, 72.0, 78.0, 81.0, 84.0, 87.0, 93.0, 102.0, 105.0, 108.0, 111.0, 114.0, 123.0, 126.0, 129.0, 141.0, 144.0, 150.0, 156.0],
-            'Reptile': [36.0, 87.0],
-            'Landscape': [87.0],
-            'Watercraft': [87.0],
-            'People': [39.0],
-            'Swimming': [84.0],
-            'Swamp': [156.0, 159.0],
-            'Snow': [39.0, 42.0, 81.0],
-            'Goose': [39.0],
-            'Stream': [99.0],
-            'Land': [6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 66.0, 156.0, 159.0],
-            'Fir': [9.0, 12.0, 138.0],
-            'Gazelle': [108.0],
-            'Arctic': [39.0, 42.0, 81.0],
-            'Human': [39.0, 69.0, 84.0, 165.0],
-            'Cat': [30.0],
-            'Cow': [39.0],
-            'Church': [135.0],
-            'Spire': [60.0],
-            'Sky': [3.0],
-            'Dirt Road': [9.0],
-            'Downtown': [135.0, 138.0],
-            'Arched': [51.0],
-            'Dessert': [105.0],
-            'Vine': [75.0],
-            'Wood': [51.0],
-            'Scenery': [87.0],
-            'Potted Plant': [75.0, 132.0, 138.0],
-            'Ocean': [36.0, 63.0, 87.0, 99.0, 114.0, 117.0],
-            'Hawk': [60.0],
-            'Rock': [69.0, 99.0, 117.0],
-            'Food': [105.0, 141.0],
-            'Gardening': [75.0],
-            'Yew': [9.0, 12.0, 24.0],
-            'Trademark': [165.0],
-            'Siamese': [30.0],
-            'Jewelry': [99.0],
-            'Crocus': [132.0],
-            'Housing': [135.0],
-            'Insect': [123.0],
-            'Algae': [12.0],
-            'Dahlia': [132.0],
-            'Monastery': [135.0],
-            'Accipiter': [60.0],
-            'Fungus': [66.0, 69.0],
-            'Pet': [30.0, 81.0, 84.0, 108.0],
-            'Astronomy': [162.0, 165.0],
-            'Town': [51.0, 135.0, 138.0],
-            'King Penguin': [39.0, 42.0, 114.0],
-            'Military': [87.0],
-            'Seafood': [141.0],
-            'Vault Ceiling': [51.0],
-            'Sand': [36.0, 39.0],
-            'Herbs': [132.0],
-            'Pine': [9.0, 12.0, 24.0],
-            'Harbor': [87.0],
-            'Vase': [75.0, 132.0, 138.0],
-            'Stained Wood': [51.0],
-            'Horse': [48.0, 111.0],
-            'Castle': [135.0],
-            'Word': [165.0],
-            'Paper': [165.0],
-            'Brochure': [165.0],
-            'Puffer': [63.0],
-            'Daisy': [132.0],
-            'City': [51.0, 135.0, 138.0],
-            'Hardwood': [51.0],
-            'Molding': [51.0],
-            'Hole': [117.0, 126.0],
-            'Aster': [132.0],
-            'Vegetation': [6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 66.0, 75.0, 129.0, 132.0, 156.0, 159.0],
-            'Cloud': [3.0],
-            'Wildlife': [33.0, 45.0, 78.0, 87.0, 108.0, 156.0],
-            'Cake': [105.0],
-            'Blackbird': [57.0],
-            'Fort': [135.0],
-            'Buzzard': [60.0],
-            'Water': [36.0, 63.0, 84.0, 87.0, 99.0, 114.0, 117.0, 156.0, 159.0, 162.0],
-            'Dome': [135.0],
-            'LED': [162.0, 165.0],
-            'Seagull': [42.0, 60.0],
-            'Pillar': [135.0],
-            'Bush': [9.0, 12.0, 24.0, 75.0, 129.0, 132.0],
-            'Grove': [12.0, 21.0, 24.0],
-            'Rural': [96.0],
-            'Adventure': [51.0],
-            'Flower': [72.0, 75.0, 132.0, 138.0, 153.0],
-            'Fog': [87.0],
-            'Crocodile': [87.0],
-            'Arecaceae': [24.0],
-            'Diamond': [99.0],
-            'Carnation': [75.0, 132.0],
-            'Field': [45.0, 93.0, 96.0, 147.0],
-            'Blossom': [72.0, 75.0, 132.0, 138.0, 153.0],
-            'Plant': [6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 54.0, 66.0, 69.0, 72.0, 75.0, 78.0, 93.0, 96.0, 120.0, 123.0, 129.0, 132.0, 138.0, 141.0, 150.0, 153.0, 156.0, 159.0],
-            'Sport': [51.0, 84.0, 114.0],
-            'Countryside': [6.0, 12.0, 96.0],
-            'Spider': [123.0],
-            'Tsunami': [99.0],
-            'Modern Art': [99.0, 138.0],
-            'Ivy': [138.0],
-            'Cattle': [39.0],
-            'Mountain': [3.0, 6.0, 42.0, 117.0],
-            'Ocelot': [156.0],
-            'Birch': [24.0],
-            'Fireworks': [138.0],
-            'Ardeidae': [54.0, 150.0],
-            'Creek': [99.0],
-            'Sparrow': [102.0],
-            'Sea Life': [36.0, 63.0, 141.0],
-            'Torte': [105.0],
-            'Diver': [84.0],
-            'Street': [51.0],
-            'Road': [9.0, 51.0],
-            'Penguin': [39.0, 42.0, 114.0],
-            'Hummingbird': [72.0],
-            'Savanna': [45.0, 93.0],
-            'Pasta': [141.0],
-            'Elephant': [45.0],
-            'Art': [99.0, 138.0],
-            'Reed': [93.0],
-            'Colt Horse': [48.0],
-            'Space': [162.0, 165.0],
-            'Palm Tree': [24.0],
-            'Alligator': [87.0],
-            'Waterfowl': [39.0, 54.0, 81.0, 150.0],
-            'Sign': [165.0],
-            'Moss': [9.0, 12.0, 21.0, 24.0, 66.0, 132.0, 141.0, 159.0],
-            'Mushroom': [66.0, 69.0],
-            'Foxglove': [132.0],
-            'Tower': [60.0],
-            'Maple Leaf': [72.0],
-            'Shrine': [135.0],
-            'Cathedral': [135.0],
-            'Fence': [9.0],
-            'Transportation': [87.0],
-            'Oak': [12.0, 24.0, 75.0],
-            'Ship': [87.0],
-            'Gravel': [9.0],
-            'Worship': [135.0],
-            'Flamingo': [144.0],
-            'Ranch': [96.0],
-            'Garden': [75.0],
-            'Path': [12.0, 24.0],
-            'Logo': [165.0],
-            'Anhinga': [102.0],
-            'Beach': [36.0],
-            'Spruce': [9.0, 12.0],
-            'Brick': [51.0],
-            'Conifer': [9.0, 12.0, 24.0, 138.0],
-            'Pasture': [96.0],
-            'Ant': [123.0],
-            'Rainforest': [6.0, 9.0, 12.0, 18.0, 21.0, 24.0, 159.0],
-            'Outer Space': [162.0, 165.0],
-            'Toy': [75.0],
-            'Agelaius': [57.0],
-            'Alps': [3.0, 6.0, 42.0, 117.0],
-            'Adorable': [30.0, 78.0],
-            'Flyer': [165.0],
-            'Flower Arrangement': [75.0, 138.0],
-            'Cumulus': [3.0],
-            'Grazing': [96.0],
-            'Grass': [9.0, 54.0, 93.0, 96.0, 132.0, 150.0, 156.0, 159.0],
-            'Eagle': [102.0],
-            'Plaza': [135.0],
-            'Audience': [165.0],
-            'Diving': [84.0],
-            'Turtle': [36.0],
-            'Leopard': [156.0],
-            'Column': [135.0],
-            'Weather': [3.0, 87.0],
-            'Jungle': [9.0, 12.0, 18.0, 21.0, 24.0, 66.0, 159.0],
-            'Desert': [105.0],
-            'Bee Eater': [54.0, 57.0, 150.0],
-            'Valley': [6.0],
-            'Sunlight': [15.0, 27.0, 162.0],
-            'Bird': [39.0, 42.0, 51.0, 54.0, 57.0, 60.0, 72.0, 81.0, 93.0, 102.0, 114.0, 144.0, 150.0],
-            'Canine': [81.0, 84.0, 105.0, 108.0, 129.0],
-            'Duck': [81.0],
-            'Aquilegia': [72.0],
-            'Tortoise': [36.0],
-            'Speech': [165.0],
-            'Stallion': [111.0],
-            'Lynx': [87.0],
-            'Fish': [63.0],
-            'Reef': [63.0],
-            'Climbing': [51.0],
-            'Grassland': [45.0, 93.0, 96.0],
-            'Cherry Blossom': [75.0, 153.0],
-            'Parthenon': [135.0],
-            'Dog': [81.0, 84.0, 108.0],
-            'Flora': [6.0, 9.0, 12.0, 15.0, 18.0, 21.0, 24.0, 54.0, 66.0, 69.0, 72.0, 75.0, 78.0, 93.0, 96.0, 120.0, 123.0, 129.0, 132.0, 138.0, 141.0, 150.0, 153.0, 156.0, 159.0],
-            'Marsh': [156.0, 159.0],
-            'Daisies': [132.0],
-            'Planter': [132.0],
-            'Destroyer': [87.0],
-            'Soil': [36.0, 39.0, 42.0, 66.0, 69.0, 99.0, 105.0, 120.0, 123.0, 132.0, 147.0],
-            'Crowd': [39.0, 69.0, 165.0],
-            'Invertebrate': [123.0, 141.0],
-            'Alleyway': [51.0],
-            'House': [135.0],
-            'Port': [87.0],
-            'Sports': [84.0, 114.0],
-            'Alley': [51.0],
-            'Abyssinian': [30.0],
-            'Ornament': [75.0, 99.0],
-            'Monkey': [78.0],
-            'Kite Bird': [51.0, 60.0],
-            'Rubble': [99.0, 123.0],
-            'Meadow': [96.0],
-            'Town Square': [135.0],
-            'Leisure Activities': [51.0],
-            'Abies': [9.0, 12.0, 138.0],
-            'Building': [51.0, 60.0, 135.0, 138.0],
-            'Panther': [156.0],
-            'Ice': [39.0, 42.0, 81.0],
-            'Golden Retriever': [108.0],
-            'Sea Waves': [99.0, 114.0, 117.0],
-            'Giraffe': [33.0],
-            'Universe': [162.0, 165.0],
-            'Thistle': [132.0],
-            'Collie': [81.0],
-            'Jar': [75.0, 132.0, 138.0],
-            'Lilac': [75.0],
-            'Terrier': [84.0],
-            'Poster': [165.0]
-        };
+        let terms = [{
+                "keyword": "Soil",
+                "timestamps": [
+                    36,
+                    39,
+                    42,
+                    66,
+                    69,
+                    99,
+                    105,
+                    120,
+                    123,
+                    132,
+                    147
+                ]
+            },
+            {
+                "keyword": "Weed",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Conifer",
+                "timestamps": [
+                    9,
+                    12,
+                    24,
+                    138
+                ]
+            },
+            {
+                "keyword": "Gardening",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Cattle",
+                "timestamps": [
+                    39
+                ]
+            },
+            {
+                "keyword": "Fish",
+                "timestamps": [
+                    63
+                ]
+            },
+            {
+                "keyword": "Anther",
+                "timestamps": [
+                    72
+                ]
+            },
+            {
+                "keyword": "Trademark",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "People",
+                "timestamps": [
+                    39
+                ]
+            },
+            {
+                "keyword": "Ground",
+                "timestamps": [
+                    42,
+                    69,
+                    99,
+                    123,
+                    132,
+                    147
+                ]
+            },
+            {
+                "keyword": "Reed",
+                "timestamps": [
+                    93
+                ]
+            },
+            {
+                "keyword": "Coyote",
+                "timestamps": [
+                    105,
+                    129
+                ]
+            },
+            {
+                "keyword": "Toy",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Spire",
+                "timestamps": [
+                    60
+                ]
+            },
+            {
+                "keyword": "Brick",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Aquilegia",
+                "timestamps": [
+                    72
+                ]
+            },
+            {
+                "keyword": "Kite Bird",
+                "timestamps": [
+                    51,
+                    60
+                ]
+            },
+            {
+                "keyword": "Ocean",
+                "timestamps": [
+                    36,
+                    63,
+                    87,
+                    99,
+                    114,
+                    117
+                ]
+            },
+            {
+                "keyword": "Eagle",
+                "timestamps": [
+                    102
+                ]
+            },
+            {
+                "keyword": "Bee Eater",
+                "timestamps": [
+                    54,
+                    57,
+                    150
+                ]
+            },
+            {
+                "keyword": "Dome",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Spotlight",
+                "timestamps": [
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Space",
+                "timestamps": [
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Scenery",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Plant",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    54,
+                    66,
+                    69,
+                    72,
+                    75,
+                    78,
+                    93,
+                    96,
+                    120,
+                    123,
+                    129,
+                    132,
+                    138,
+                    141,
+                    150,
+                    153,
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Flower Arrangement",
+                "timestamps": [
+                    75,
+                    138
+                ]
+            },
+            {
+                "keyword": "Port",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Ocelot",
+                "timestamps": [
+                    156
+                ]
+            },
+            {
+                "keyword": "Anhinga",
+                "timestamps": [
+                    102
+                ]
+            },
+            {
+                "keyword": "Pasta",
+                "timestamps": [
+                    141
+                ]
+            },
+            {
+                "keyword": "Art",
+                "timestamps": [
+                    99,
+                    138
+                ]
+            },
+            {
+                "keyword": "Ice",
+                "timestamps": [
+                    39,
+                    42,
+                    81
+                ]
+            },
+            {
+                "keyword": "Palm Tree",
+                "timestamps": [
+                    24
+                ]
+            },
+            {
+                "keyword": "Meadow",
+                "timestamps": [
+                    96
+                ]
+            },
+            {
+                "keyword": "Person",
+                "timestamps": [
+                    39,
+                    69,
+                    84,
+                    165
+                ]
+            },
+            {
+                "keyword": "Astronomy",
+                "timestamps": [
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Sea",
+                "timestamps": [
+                    36,
+                    63,
+                    87,
+                    99,
+                    114,
+                    117
+                ]
+            },
+            {
+                "keyword": "Potted Plant",
+                "timestamps": [
+                    75,
+                    132,
+                    138
+                ]
+            },
+            {
+                "keyword": "Spruce",
+                "timestamps": [
+                    9,
+                    12
+                ]
+            },
+            {
+                "keyword": "Molding",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Bird",
+                "timestamps": [
+                    39,
+                    42,
+                    51,
+                    54,
+                    57,
+                    60,
+                    72,
+                    81,
+                    93,
+                    102,
+                    114,
+                    144,
+                    150
+                ]
+            },
+            {
+                "keyword": "Ruins",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Jungle",
+                "timestamps": [
+                    9,
+                    12,
+                    18,
+                    21,
+                    24,
+                    66,
+                    159
+                ]
+            },
+            {
+                "keyword": "Pine",
+                "timestamps": [
+                    9,
+                    12,
+                    24
+                ]
+            },
+            {
+                "keyword": "Cake",
+                "timestamps": [
+                    105
+                ]
+            },
+            {
+                "keyword": "Daisies",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Oak",
+                "timestamps": [
+                    12,
+                    24,
+                    75
+                ]
+            },
+            {
+                "keyword": "Arch",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Tower",
+                "timestamps": [
+                    60
+                ]
+            },
+            {
+                "keyword": "Neighborhood",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Leopard",
+                "timestamps": [
+                    156
+                ]
+            },
+            {
+                "keyword": "Land",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    66,
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Rock",
+                "timestamps": [
+                    69,
+                    99,
+                    117
+                ]
+            },
+            {
+                "keyword": "Pizza",
+                "timestamps": [
+                    141
+                ]
+            },
+            {
+                "keyword": "Crane Bird",
+                "timestamps": [
+                    54,
+                    150
+                ]
+            },
+            {
+                "keyword": "Ardeidae",
+                "timestamps": [
+                    54,
+                    150
+                ]
+            },
+            {
+                "keyword": "Carnation",
+                "timestamps": [
+                    75,
+                    132
+                ]
+            },
+            {
+                "keyword": "Valley",
+                "timestamps": [
+                    6
+                ]
+            },
+            {
+                "keyword": "Aster",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Ship",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Forest",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    66,
+                    159
+                ]
+            },
+            {
+                "keyword": "Climbing",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Farm",
+                "timestamps": [
+                    96
+                ]
+            },
+            {
+                "keyword": "Sport",
+                "timestamps": [
+                    51,
+                    84,
+                    114
+                ]
+            },
+            {
+                "keyword": "Fence",
+                "timestamps": [
+                    9
+                ]
+            },
+            {
+                "keyword": "Sign",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Alligator",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Sprout",
+                "timestamps": [
+                    66
+                ]
+            },
+            {
+                "keyword": "Word",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Fog",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Spider",
+                "timestamps": [
+                    123
+                ]
+            },
+            {
+                "keyword": "Text",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Swimming",
+                "timestamps": [
+                    84
+                ]
+            },
+            {
+                "keyword": "Dahlia",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Gemstone",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Horse",
+                "timestamps": [
+                    48,
+                    111
+                ]
+            },
+            {
+                "keyword": "Cloud",
+                "timestamps": [
+                    3
+                ]
+            },
+            {
+                "keyword": "Temple",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Algae",
+                "timestamps": [
+                    12
+                ]
+            },
+            {
+                "keyword": "Tsunami",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Winter",
+                "timestamps": [
+                    39,
+                    42,
+                    81
+                ]
+            },
+            {
+                "keyword": "Hedge",
+                "timestamps": [
+                    9
+                ]
+            },
+            {
+                "keyword": "Speech",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Countryside",
+                "timestamps": [
+                    6,
+                    12,
+                    96
+                ]
+            },
+            {
+                "keyword": "Building",
+                "timestamps": [
+                    51,
+                    60,
+                    135,
+                    138
+                ]
+            },
+            {
+                "keyword": "Torte",
+                "timestamps": [
+                    105
+                ]
+            },
+            {
+                "keyword": "Golden Retriever",
+                "timestamps": [
+                    108
+                ]
+            },
+            {
+                "keyword": "Mosque",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Adorable",
+                "timestamps": [
+                    30,
+                    78
+                ]
+            },
+            {
+                "keyword": "LED",
+                "timestamps": [
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Terrier",
+                "timestamps": [
+                    84
+                ]
+            },
+            {
+                "keyword": "Sparrow",
+                "timestamps": [
+                    102
+                ]
+            },
+            {
+                "keyword": "Audience",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Jewelry",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Night",
+                "timestamps": [
+                    0,
+                    66,
+                    138
+                ]
+            },
+            {
+                "keyword": "Ranch",
+                "timestamps": [
+                    96
+                ]
+            },
+            {
+                "keyword": "Vessel",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Arched",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Abyssinian",
+                "timestamps": [
+                    30
+                ]
+            },
+            {
+                "keyword": "Maple Leaf",
+                "timestamps": [
+                    72
+                ]
+            },
+            {
+                "keyword": "Brochure",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Turtle",
+                "timestamps": [
+                    36
+                ]
+            },
+            {
+                "keyword": "Ivy",
+                "timestamps": [
+                    138
+                ]
+            },
+            {
+                "keyword": "Siamese",
+                "timestamps": [
+                    30
+                ]
+            },
+            {
+                "keyword": "Creek",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Lynx",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Invertebrate",
+                "timestamps": [
+                    123,
+                    141
+                ]
+            },
+            {
+                "keyword": "Plaza",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Wood",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Blossom",
+                "timestamps": [
+                    72,
+                    75,
+                    132,
+                    138,
+                    153
+                ]
+            },
+            {
+                "keyword": "Goose",
+                "timestamps": [
+                    39
+                ]
+            },
+            {
+                "keyword": "Town Square",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Hole",
+                "timestamps": [
+                    117,
+                    126
+                ]
+            },
+            {
+                "keyword": "Cumulus",
+                "timestamps": [
+                    3
+                ]
+            },
+            {
+                "keyword": "Harbor",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Destroyer",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Sports",
+                "timestamps": [
+                    84,
+                    114
+                ]
+            },
+            {
+                "keyword": "Desert",
+                "timestamps": [
+                    105
+                ]
+            },
+            {
+                "keyword": "Hawk",
+                "timestamps": [
+                    60
+                ]
+            },
+            {
+                "keyword": "Alps",
+                "timestamps": [
+                    3,
+                    6,
+                    42,
+                    117
+                ]
+            },
+            {
+                "keyword": "Stream",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Crowd",
+                "timestamps": [
+                    39,
+                    69,
+                    165
+                ]
+            },
+            {
+                "keyword": "Duck",
+                "timestamps": [
+                    81
+                ]
+            },
+            {
+                "keyword": "Rural",
+                "timestamps": [
+                    96
+                ]
+            },
+            {
+                "keyword": "Marsh",
+                "timestamps": [
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Mammal",
+                "timestamps": [
+                    30,
+                    33,
+                    39,
+                    45,
+                    48,
+                    78,
+                    81,
+                    84,
+                    87,
+                    105,
+                    108,
+                    111,
+                    129,
+                    156
+                ]
+            },
+            {
+                "keyword": "Monastery",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Military",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Church",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Navy",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "City",
+                "timestamps": [
+                    51,
+                    135,
+                    138
+                ]
+            },
+            {
+                "keyword": "Lighting",
+                "timestamps": [
+                    138,
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Human",
+                "timestamps": [
+                    39,
+                    69,
+                    84,
+                    165
+                ]
+            },
+            {
+                "keyword": "Moss",
+                "timestamps": [
+                    9,
+                    12,
+                    21,
+                    24,
+                    66,
+                    132,
+                    141,
+                    159
+                ]
+            },
+            {
+                "keyword": "House",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Flying",
+                "timestamps": [
+                    57
+                ]
+            },
+            {
+                "keyword": "Birch",
+                "timestamps": [
+                    24
+                ]
+            },
+            {
+                "keyword": "Vine",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Crocodile",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Abies",
+                "timestamps": [
+                    9,
+                    12,
+                    138
+                ]
+            },
+            {
+                "keyword": "Adventure",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Coast",
+                "timestamps": [
+                    36
+                ]
+            },
+            {
+                "keyword": "Dirt Road",
+                "timestamps": [
+                    9
+                ]
+            },
+            {
+                "keyword": "Savanna",
+                "timestamps": [
+                    45,
+                    93
+                ]
+            },
+            {
+                "keyword": "King Penguin",
+                "timestamps": [
+                    39,
+                    42,
+                    114
+                ]
+            },
+            {
+                "keyword": "Foxglove",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Outer Space",
+                "timestamps": [
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Daisy",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Reptile",
+                "timestamps": [
+                    36,
+                    87
+                ]
+            },
+            {
+                "keyword": "Downtown",
+                "timestamps": [
+                    135,
+                    138
+                ]
+            },
+            {
+                "keyword": "Gravel",
+                "timestamps": [
+                    9
+                ]
+            },
+            {
+                "keyword": "Hummingbird",
+                "timestamps": [
+                    72
+                ]
+            },
+            {
+                "keyword": "Giraffe",
+                "timestamps": [
+                    33
+                ]
+            },
+            {
+                "keyword": "Food",
+                "timestamps": [
+                    105,
+                    141
+                ]
+            },
+            {
+                "keyword": "Flyer",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Sycamore",
+                "timestamps": [
+                    12,
+                    24,
+                    75
+                ]
+            },
+            {
+                "keyword": "Road",
+                "timestamps": [
+                    9,
+                    51
+                ]
+            },
+            {
+                "keyword": "Heron",
+                "timestamps": [
+                    54,
+                    150
+                ]
+            },
+            {
+                "keyword": "Cathedral",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Seafood",
+                "timestamps": [
+                    141
+                ]
+            },
+            {
+                "keyword": "Buzzard",
+                "timestamps": [
+                    60
+                ]
+            },
+            {
+                "keyword": "Surfing",
+                "timestamps": [
+                    114
+                ]
+            },
+            {
+                "keyword": "Fireworks",
+                "timestamps": [
+                    138
+                ]
+            },
+            {
+                "keyword": "Fungus",
+                "timestamps": [
+                    66,
+                    69
+                ]
+            },
+            {
+                "keyword": "Arctic",
+                "timestamps": [
+                    39,
+                    42,
+                    81
+                ]
+            },
+            {
+                "keyword": "Sky",
+                "timestamps": [
+                    3
+                ]
+            },
+            {
+                "keyword": "Arecaceae",
+                "timestamps": [
+                    24
+                ]
+            },
+            {
+                "keyword": "Wildlife",
+                "timestamps": [
+                    33,
+                    45,
+                    78,
+                    87,
+                    108,
+                    156
+                ]
+            },
+            {
+                "keyword": "Weather",
+                "timestamps": [
+                    3,
+                    87
+                ]
+            },
+            {
+                "keyword": "Yew",
+                "timestamps": [
+                    9,
+                    12,
+                    24
+                ]
+            },
+            {
+                "keyword": "Sea Life",
+                "timestamps": [
+                    36,
+                    63,
+                    141
+                ]
+            },
+            {
+                "keyword": "Hardwood",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Flamingo",
+                "timestamps": [
+                    144
+                ]
+            },
+            {
+                "keyword": "Alley",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Grazing",
+                "timestamps": [
+                    96
+                ]
+            },
+            {
+                "keyword": "Fort",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Cherry Blossom",
+                "timestamps": [
+                    75,
+                    153
+                ]
+            },
+            {
+                "keyword": "Zoo",
+                "timestamps": [
+                    126
+                ]
+            },
+            {
+                "keyword": "Flora",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    54,
+                    66,
+                    69,
+                    72,
+                    75,
+                    78,
+                    93,
+                    96,
+                    120,
+                    123,
+                    129,
+                    132,
+                    138,
+                    141,
+                    150,
+                    153,
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Grass",
+                "timestamps": [
+                    9,
+                    54,
+                    93,
+                    96,
+                    132,
+                    150,
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Mushroom",
+                "timestamps": [
+                    66,
+                    69
+                ]
+            },
+            {
+                "keyword": "Diamond",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Pillar",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Canine",
+                "timestamps": [
+                    81,
+                    84,
+                    105,
+                    108,
+                    129
+                ]
+            },
+            {
+                "keyword": "Thistle",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Vase",
+                "timestamps": [
+                    75,
+                    132,
+                    138
+                ]
+            },
+            {
+                "keyword": "Watercraft",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Beak",
+                "timestamps": [
+                    57,
+                    60,
+                    72,
+                    102
+                ]
+            },
+            {
+                "keyword": "Sand",
+                "timestamps": [
+                    36,
+                    39
+                ]
+            },
+            {
+                "keyword": "Fir",
+                "timestamps": [
+                    9,
+                    12,
+                    138
+                ]
+            },
+            {
+                "keyword": "Planter",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Reef",
+                "timestamps": [
+                    63
+                ]
+            },
+            {
+                "keyword": "Accipiter",
+                "timestamps": [
+                    60
+                ]
+            },
+            {
+                "keyword": "Cactus",
+                "timestamps": [
+                    120
+                ]
+            },
+            {
+                "keyword": "Penguin",
+                "timestamps": [
+                    39,
+                    42,
+                    114
+                ]
+            },
+            {
+                "keyword": "Arachnid",
+                "timestamps": [
+                    123
+                ]
+            },
+            {
+                "keyword": "Jar",
+                "timestamps": [
+                    75,
+                    132,
+                    138
+                ]
+            },
+            {
+                "keyword": "Universe",
+                "timestamps": [
+                    162,
+                    165
+                ]
+            },
+            {
+                "keyword": "Landscape",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Logo",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Sea Waves",
+                "timestamps": [
+                    99,
+                    114,
+                    117
+                ]
+            },
+            {
+                "keyword": "Seagull",
+                "timestamps": [
+                    42,
+                    60
+                ]
+            },
+            {
+                "keyword": "Mountain",
+                "timestamps": [
+                    3,
+                    6,
+                    42,
+                    117
+                ]
+            },
+            {
+                "keyword": "Lilac",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Elephant",
+                "timestamps": [
+                    45
+                ]
+            },
+            {
+                "keyword": "Castle",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Collie",
+                "timestamps": [
+                    81
+                ]
+            },
+            {
+                "keyword": "Housing",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Grove",
+                "timestamps": [
+                    12,
+                    21,
+                    24
+                ]
+            },
+            {
+                "keyword": "Outdoors",
+                "timestamps": [
+                    0,
+                    3,
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    36,
+                    39,
+                    42,
+                    45,
+                    51,
+                    63,
+                    66,
+                    75,
+                    78,
+                    81,
+                    87,
+                    93,
+                    96,
+                    99,
+                    105,
+                    114,
+                    117,
+                    123,
+                    132,
+                    138,
+                    141,
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Cat",
+                "timestamps": [
+                    30
+                ]
+            },
+            {
+                "keyword": "Stained Wood",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Antelope",
+                "timestamps": [
+                    108
+                ]
+            },
+            {
+                "keyword": "Vegetation",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    66,
+                    75,
+                    129,
+                    132,
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Insect",
+                "timestamps": [
+                    123
+                ]
+            },
+            {
+                "keyword": "Street",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Path",
+                "timestamps": [
+                    12,
+                    24
+                ]
+            },
+            {
+                "keyword": "Pottery",
+                "timestamps": [
+                    75,
+                    132,
+                    138
+                ]
+            },
+            {
+                "keyword": "Flower",
+                "timestamps": [
+                    72,
+                    75,
+                    132,
+                    138,
+                    153
+                ]
+            },
+            {
+                "keyword": "Panther",
+                "timestamps": [
+                    156
+                ]
+            },
+            {
+                "keyword": "Stallion",
+                "timestamps": [
+                    111
+                ]
+            },
+            {
+                "keyword": "Snorkeling",
+                "timestamps": [
+                    84
+                ]
+            },
+            {
+                "keyword": "Animal",
+                "timestamps": [
+                    30,
+                    33,
+                    36,
+                    39,
+                    42,
+                    45,
+                    48,
+                    51,
+                    54,
+                    57,
+                    60,
+                    63,
+                    72,
+                    78,
+                    81,
+                    84,
+                    87,
+                    93,
+                    102,
+                    105,
+                    108,
+                    111,
+                    114,
+                    123,
+                    126,
+                    129,
+                    141,
+                    144,
+                    150,
+                    156
+                ]
+            },
+            {
+                "keyword": "Urban",
+                "timestamps": [
+                    51,
+                    60,
+                    135,
+                    138
+                ]
+            },
+            {
+                "keyword": "Modern Art",
+                "timestamps": [
+                    99,
+                    138
+                ]
+            },
+            {
+                "keyword": "Town",
+                "timestamps": [
+                    51,
+                    135,
+                    138
+                ]
+            },
+            {
+                "keyword": "Rubble",
+                "timestamps": [
+                    99,
+                    123
+                ]
+            },
+            {
+                "keyword": "Garden",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Worship",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Paper",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Monkey",
+                "timestamps": [
+                    78
+                ]
+            },
+            {
+                "keyword": "Field",
+                "timestamps": [
+                    45,
+                    93,
+                    96,
+                    147
+                ]
+            },
+            {
+                "keyword": "Transportation",
+                "timestamps": [
+                    87
+                ]
+            },
+            {
+                "keyword": "Water",
+                "timestamps": [
+                    36,
+                    63,
+                    84,
+                    87,
+                    99,
+                    114,
+                    117,
+                    156,
+                    159,
+                    162
+                ]
+            },
+            {
+                "keyword": "Gazelle",
+                "timestamps": [
+                    108
+                ]
+            },
+            {
+                "keyword": "Pet",
+                "timestamps": [
+                    30,
+                    81,
+                    84,
+                    108
+                ]
+            },
+            {
+                "keyword": "Architecture",
+                "timestamps": [
+                    51,
+                    60,
+                    135
+                ]
+            },
+            {
+                "keyword": "Leisure Activities",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Jaguar",
+                "timestamps": [
+                    156
+                ]
+            },
+            {
+                "keyword": "Pasture",
+                "timestamps": [
+                    96
+                ]
+            },
+            {
+                "keyword": "Lasagna",
+                "timestamps": [
+                    141
+                ]
+            },
+            {
+                "keyword": "Parthenon",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Ornament",
+                "timestamps": [
+                    75,
+                    99
+                ]
+            },
+            {
+                "keyword": "Poster",
+                "timestamps": [
+                    165
+                ]
+            },
+            {
+                "keyword": "Dessert",
+                "timestamps": [
+                    105
+                ]
+            },
+            {
+                "keyword": "Crocus",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Flower Bouquet",
+                "timestamps": [
+                    75
+                ]
+            },
+            {
+                "keyword": "Leaf",
+                "timestamps": [
+                    24,
+                    72
+                ]
+            },
+            {
+                "keyword": "Colt Horse",
+                "timestamps": [
+                    48
+                ]
+            },
+            {
+                "keyword": "Swamp",
+                "timestamps": [
+                    156,
+                    159
+                ]
+            },
+            {
+                "keyword": "Shrine",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Swallow",
+                "timestamps": [
+                    54,
+                    57
+                ]
+            },
+            {
+                "keyword": "Dog",
+                "timestamps": [
+                    81,
+                    84,
+                    108
+                ]
+            },
+            {
+                "keyword": "Cow",
+                "timestamps": [
+                    39
+                ]
+            },
+            {
+                "keyword": "Rainforest",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    18,
+                    21,
+                    24,
+                    159
+                ]
+            },
+            {
+                "keyword": "Vault Ceiling",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Blackbird",
+                "timestamps": [
+                    57
+                ]
+            },
+            {
+                "keyword": "Nature",
+                "timestamps": [
+                    3,
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    36,
+                    42,
+                    45,
+                    63,
+                    66,
+                    87,
+                    93,
+                    96,
+                    99,
+                    105,
+                    114,
+                    117,
+                    159
+                ]
+            },
+            {
+                "keyword": "Agelaius",
+                "timestamps": [
+                    57
+                ]
+            },
+            {
+                "keyword": "Puffer",
+                "timestamps": [
+                    63
+                ]
+            },
+            {
+                "keyword": "Herbs",
+                "timestamps": [
+                    132
+                ]
+            },
+            {
+                "keyword": "Sunlight",
+                "timestamps": [
+                    15,
+                    27,
+                    162
+                ]
+            },
+            {
+                "keyword": "Bush",
+                "timestamps": [
+                    9,
+                    12,
+                    24,
+                    75,
+                    129,
+                    132
+                ]
+            },
+            {
+                "keyword": "Ostrich",
+                "timestamps": [
+                    93
+                ]
+            },
+            {
+                "keyword": "Alleyway",
+                "timestamps": [
+                    51
+                ]
+            },
+            {
+                "keyword": "Diving",
+                "timestamps": [
+                    84
+                ]
+            },
+            {
+                "keyword": "Crab",
+                "timestamps": [
+                    141
+                ]
+            },
+            {
+                "keyword": "Tortoise",
+                "timestamps": [
+                    36
+                ]
+            },
+            {
+                "keyword": "Tree",
+                "timestamps": [
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    66,
+                    75,
+                    138,
+                    159
+                ]
+            },
+            {
+                "keyword": "Column",
+                "timestamps": [
+                    135
+                ]
+            },
+            {
+                "keyword": "Wilderness",
+                "timestamps": [
+                    99
+                ]
+            },
+            {
+                "keyword": "Beach",
+                "timestamps": [
+                    36
+                ]
+            },
+            {
+                "keyword": "Snow",
+                "timestamps": [
+                    39,
+                    42,
+                    81
+                ]
+            },
+            {
+                "keyword": "Diver",
+                "timestamps": [
+                    84
+                ]
+            },
+            {
+                "keyword": "Waterfowl",
+                "timestamps": [
+                    39,
+                    54,
+                    81,
+                    150
+                ]
+            },
+            {
+                "keyword": "Grassland",
+                "timestamps": [
+                    45,
+                    93,
+                    96
+                ]
+            },
+            {
+                "keyword": "Steeple",
+                "timestamps": [
+                    60
+                ]
+            },
+            {
+                "keyword": "Ant",
+                "timestamps": [
+                    123
+                ]
+            }
+        ];
         return terms;
     }
 
     initFuse (keywords) {
-        return new Fuse(keywords);
+        return new Fuse(keywords, {
+            keys: ['keyword'],
+            minMatchCharLength: 2,
+            findAllMatches: false,
+            threshold: 0.5
+        });
+    }
+
+    search (term) {
+        return this.fuse.search(term);
     }
 }
 
-const filter = (term, response) => {
-    return response(['hello', 'goodbye']);
+const seek = (e) => {
+    videoPlayer.currentTime = e.target.dataset.timestamp - 0.6;
 };
 
-const suggest = (e) => {
+const suggest = (e, fzsch) => {
     term = e.target.value;
-    console.log(term);
-    const suggestions = [];
+    let suggestions = [];
 
-    for (let term in terms) {
-    }
+    suggestions = fzsch.search(term);
 
     suggestions_output = document.querySelector('#scope-search #search-suggestions');
     if (suggestions.length > 0) {
         suggestions_output.classList.remove('empty');
         e.target.classList.add('suggestions');
-        suggestions_output.innerText = term;
+        suggestions_output.innerHTML = '';
+        for (var i = 0, len = suggestions.length; i < len; i++) {
+            suggestions_output.innerHTML += `
+                <div class="search-results">
+                    ${suggestions[i].keyword}
+                    <span class="timestamps">
+                        ${suggestions[i].timestamps.map(val => `<a data-timestamp="${val}">${val}</a>`).join(' ')}
+                    </span>
+                </div>`;
+        }
+        // suggestions_output.innerText = suggestions;
     } else {
         suggestions_output.classList.add('empty');
         e.target.classList.remove('suggestions');
@@ -347,7 +2163,17 @@ const addButton = () => {
     button.addEventListener('click', toggleButtonSearch);
 
     let input = scopeContainer.querySelector('#scope-search > #search-input');
-    input.addEventListener('keyup', suggest);
+    let fzsch = new FuzzySearch();
+    input.addEventListener('keyup', function (e) {
+        suggest(e, fzsch);
+    });
+
+    let suggestions_output = scopeContainer.querySelector('#scope-search #search-suggestions');
+    suggestions_output.addEventListener('click', function (e) {
+        if (e.target && e.target.nodeName === 'A') {
+            seek(e);
+        }
+    });
 
     container.insertBefore(scopeContainer, container.children[1]);
 };

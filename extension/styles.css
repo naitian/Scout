@@ -58,12 +58,30 @@
 #scope-search > #search-suggestions.empty {
     height: 0;
     padding: 0;
+    border: none;
 }
 
 #scope-search > #search-suggestions {
     width: 160px;
     position: relative;
-    left: 80px;
+    left: 79px;
+    top: -1px;
+    border: 1px solid blue;
     padding: 10px;
-    background-color: #eee;
+    background-color: #white;
+}
+
+#scope-search .search-results {
+    font-size: 12px;
+    padding: 2px 0px;
+}
+
+#scope-search .search-results a {
+    color: blue;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#scope-search .search-results .timestamps {
+    float: right;
 }

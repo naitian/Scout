@@ -17,7 +17,7 @@ def download_url(url, hook=None):
         url = [url]
     ydl_opts = {
         'format': 'bestvideo[height<=480]',
-        'outtmpl': get_absolute_path('./videos/%(title)s.%(ext)s')
+        'outtmpl': get_absolute_path(os.path.join('.', 'videos', '%(title)s.%(ext)s'))
     }
     if hook:
         ydl_opts['progress_hooks'] = [hook]
@@ -28,9 +28,9 @@ def download_url(url, hook=None):
 def get_images(url):
     def finished(d):
         if d['status'] == 'finished':
-            video_path = d['filename']
+            video_path = os.path.split(d['filename'])[-1]
             print(video_path)
-            os.makedirs(get_absolute_path('./frames/{}/'.format(video_path)), exist_ok=True)
+            os.makedirs(get_absolute_path(os.path.join('.', 'frames', '{}').format(video_path)), exist_ok=True)
             framerate, scene_list = get_frame_timestamps_stupid(video_path)
             write_frames_from_list(video_path, scene_list)
 
@@ -38,7 +38,7 @@ def get_images(url):
 
 
 def get_frame_timestamps(filename):
-    path = get_absolute_path('./videos/{}'.format(filename))
+    path = get_absolute_path(os.path.join('.', 'videos', '{}').format(filename))
     content_detector = scenedetect.detectors.ContentDetector()
     smgr = scenedetect.manager.SceneManager(detector=content_detector)
     scenedetect.detect_scenes_file(path, smgr)
@@ -47,7 +47,7 @@ def get_frame_timestamps(filename):
 
 
 def get_frame_timestamps_stupid(filename):
-    path = get_absolute_path('./videos/{}'.format(filename))
+    path = get_absolute_path(os.path.join('.', 'videos', '{}').format(filename))
     video = cv2.VideoCapture(path)
     fps = int(video.get(cv2.CAP_PROP_FPS))
     length = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -57,10 +57,10 @@ def get_frame_timestamps_stupid(filename):
 
 def write_frames_from_list(filename, scene_list):
     print('Writing Images')
-    path = get_absolute_path('./videos/{}'.format(filename))
-    img_path_tpl = get_absolute_path('./frames/{}/'.format(filename))
+    path = get_absolute_path(os.path.join('.', 'videos', '{}').format(filename))
+    img_path_tpl = get_absolute_path(os.path.join('.', 'frames', '{}').format(filename))
 
-    os.makedir(img_path_tpl, exist_ok=True)
+    os.makedirs(img_path_tpl, exist_ok=True)
     cap = cv2.VideoCapture(path)
     ind = 0
     success = True
@@ -80,4 +80,4 @@ def get_images_from_filename(filename):
     write_frames_from_list(filename, scene_list)
 
 # get_images_from_filename('It\'s Tentacle Time! -- Mind Blow #112.mp4')
-# get_images('www.youtube.com/watch?v=PXd-sZb5oqA')
+get_images('www.youtube.com/watch?v=PXd-sZb5oqA')

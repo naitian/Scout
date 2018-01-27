@@ -1,5 +1,5 @@
 import os
-
+import boto3
 import youtube_dl
 import scenedetect
 import scenedetect.manager
@@ -24,6 +24,46 @@ def download_url(url, hook=None):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(url)
 
+def update_video_index(url, title, framerate):
+    dynamodb_client = boto3.client('dynamodb')
+    tables_list = dynamodb_client.list_tables()
+    if 'index' not in tables_list['TableNames']:
+        dynamodb_client.create_table(
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'url',
+                    'AttributeType': 'S'
+                }
+            ],
+            TableName='index',
+            KeySchema=[
+                {
+                    'AttributeName': 'url',
+                    'KeyType': 'HASH'
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 10,
+                'WriteCapacityUnits': 10
+            }
+        )
+        dynamodb_client.get_waiter('table_exists').wait(TableName='index')
+    response = dynamodb_client.put_item(
+        TableName='index',
+        Item={
+            'url': {
+                'S': url
+            },
+            'title': {
+                'S': title
+            },
+            'framerate': {
+                'N': str(int(framerate))
+            }
+        }
+    )
+    return response
+
 
 def get_images(url):
     def finished(d):
@@ -32,8 +72,10 @@ def get_images(url):
             print(video_path)
             os.makedirs(get_absolute_path(os.path.join('.', 'frames', '{}').format(video_path)), exist_ok=True)
             framerate, scene_list = get_frame_timestamps_stupid(video_path)
-            write_frames_from_list(video_path, scene_list)
-
+            print('framerate', framerate)
+            update_video_index(url, video_path, framerate)
+            write_frames_from_list(video_path, scene_list)  
+    
     download_url(url, hook=finished)
 
 
@@ -58,7 +100,7 @@ def get_frame_timestamps_stupid(filename):
 def write_frames_from_list(filename, scene_list):
     print('Writing Images')
     path = get_absolute_path(os.path.join('.', 'videos', '{}').format(filename))
-    img_path_tpl = get_absolute_path(os.path.join('.', 'frames', '{}').format(filename))
+    img_path_tpl = get_absolute_path(os.path.join('.', 'frames', '{}', '').format(filename))
 
     os.makedirs(img_path_tpl, exist_ok=True)
     cap = cv2.VideoCapture(path)

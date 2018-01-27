@@ -79,5 +79,6 @@ def get_images_from_filename(filename):
     # frame_rate, scene_list = get_frame_timestamps_stupid(filename)
     write_frames_from_list(filename, scene_list)
 
-# get_images_from_filename('It\'s Tentacle Time! -- Mind Blow #112.mp4')
-get_images('www.youtube.com/watch?v=PXd-sZb5oqA')
+if __name__ == '__main__':
+    # get_images_from_filename('It\'s Tentacle Time! -- Mind Blow #112.mp4')
+    get_images('www.youtube.com/watch?v=PXd-sZb5oqA')

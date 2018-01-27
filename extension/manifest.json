@@ -7,7 +7,7 @@
         {
             "matches": ["*://*.youtube.com/*"],
             "css": ["styles.css"],
-            "js": ["script.js"],
+            "js": ["fuse.min.js", "script.js"],
             "run_at": "document_end"
         }
     ]

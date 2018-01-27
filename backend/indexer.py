@@ -77,4 +77,4 @@ def index_video(video_url):
     save_labels(url, title, framerate)
 
 if __name__ == '__main__':
-    index_video('https://www.youtube.com/watch?v=c8aFcHFu8QM')
+    index_video('https://www.youtube.com/watch?v=R_Dak_JySMk')

@@ -31,15 +31,8 @@ def get_images(url):
             video_path = d['filename']
             print(video_path)
             os.makedirs(get_absolute_path('./frames/{}/'.format(video_path)), exist_ok=True)
-            videodata = skvideo.io.vread(video_path)
-            videometadata = skvideo.io.ffprobe(video_path)
-
-            frame_rate = videometadata['video']['@avg_frame_rate']
-
-            scene_cuts = skvideo.measure.scenedet(videodata, method='histogram', parameter1=1.0)
-
-            for cut in scene_cuts:
-                skvideo.io.vwrite('frame{}.png'.format(cut // frame_rate), videodata[cut])
+            framerate, scene_list = get_frame_timestamps_stupid(video_path)
+            write_frames_from_list(video_path, scene_list)
 
     download_url(url, hook=finished)
 
@@ -66,6 +59,8 @@ def write_frames_from_list(filename, scene_list):
     print('Writing Images')
     path = get_absolute_path('./videos/{}'.format(filename))
     img_path_tpl = get_absolute_path('./frames/{}/'.format(filename))
+
+    os.makedir(img_path_tpl, exist_ok=True)
     cap = cv2.VideoCapture(path)
     ind = 0
     success = True
@@ -84,5 +79,5 @@ def get_images_from_filename(filename):
     # frame_rate, scene_list = get_frame_timestamps_stupid(filename)
     write_frames_from_list(filename, scene_list)
 
-get_images_from_filename('It\'s Tentacle Time! -- Mind Blow #112.mp4')
+# get_images_from_filename('It\'s Tentacle Time! -- Mind Blow #112.mp4')
 # get_images('www.youtube.com/watch?v=PXd-sZb5oqA')

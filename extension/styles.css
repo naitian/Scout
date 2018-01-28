@@ -62,6 +62,7 @@
 }
 
 #scope-search > #search-suggestions {
+    display: grid;
     width: 160px;
     position: relative;
     left: 79px;

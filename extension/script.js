@@ -89,6 +89,8 @@ const suggest = (e, fzsch) => {
 const addButton = () => {
     console.log('adding button');
     const container = document.querySelector('#top');
+    const alertsContainer = document.querySelector('#container > #main');
+    const alerts = document.querySelector('#main > #alerts');
     const scopeContainer = document.createElement('div');
 
     scopeContainer.id = 'scope-search';
@@ -139,7 +141,7 @@ const addButton = () => {
         }
     });
 
-    container.insertBefore(scopeContainer, container.children[1]);
+    alertsContainer.insertBefore(scopeContainer, alerts);
 };
 
 const tryInit = () => {

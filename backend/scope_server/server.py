@@ -1,5 +1,5 @@
 from flask import Flask, request
-from .indexer import index_video
+from ..indexer import index_video
 
 app = Flask(__name__)
 

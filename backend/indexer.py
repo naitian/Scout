@@ -2,6 +2,7 @@ import boto3
 import frame_rekognition
 import json
 import preprocess
+from shutil import rmtree
 import sys
 
 def extract_frames_from_video(video_url: str) -> None:
@@ -67,6 +68,12 @@ def save_labels(video_url: str, video_title: str, video_framerate: int) -> None:
         UpdateExpression='SET #L = :l'
     )
 
+def delete_media():
+    """Delete frames and videos stored locally.
+    """
+    rmtree('frames/')
+    rmtree('videos/')
+
 def index_video(video_url):
     """Index labels of Youtube video into DynamoDB.
 
@@ -76,6 +83,7 @@ def index_video(video_url):
     extract_frames_from_video(video_url)
     url, title, framerate = get_metadata_of_video(video_url)
     save_labels(url, title, framerate)
+    delete_media()
 
 if __name__ == '__main__':
     assert len(sys.argv) == 2

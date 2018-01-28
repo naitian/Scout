@@ -4,6 +4,7 @@
 }
 
 #scope-search > button {
+    opacity: 0.12;
     border-radius: 50px;
     /* background-color: #3742fa; */
     background: #4e54c8;

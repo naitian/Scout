@@ -1,5 +1,9 @@
-# Scope
+# Scout
 
-Using computer vision to search through Youtube videos.
+> Find what you want, before you get there.
 
-![Scope](https://imgur.com/ZutHO9a.png)
+![Scout Screenshot](https://imgur.com/ZutHO9a.png)
+
+## What is Scout?
+
+Scout is a Chrome extension that lets you search for scenes in Youtube videos by using computer vision to determine what's in each frame.

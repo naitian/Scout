@@ -1,3 +1,6 @@
+# run.sh
+# backend/run.sh
+
 # Frame and Video Directories
 backend/frames/
 backend/videos/

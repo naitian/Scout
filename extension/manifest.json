@@ -5,10 +5,13 @@
     "manifest_version": 2,
     "content_scripts": [
         {
-            "matches": ["*://*.youtube.com/*"],
+            "matches": ["*://*.youtube.com/watch*"],
             "css": ["styles.css"],
             "js": ["fuse.min.js", "script.js"],
             "run_at": "document_end"
         }
+    ],
+    "permissions": [
+        "https://scope.naitian.org/process"
     ]
 }

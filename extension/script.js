@@ -19,8 +19,8 @@ const toggleButtonSearch = () => {
 };
 
 class FuzzySearch {
-    constructor () {
-        this.keywords = this.fetchKeywords();
+    constructor (fetched_keywords) {
+        this.keywords = fetched_keywords;
         this.fuse = this.initFuse(this.keywords);
     }
 
@@ -2167,12 +2167,37 @@ const addButton = () => {
 
     let button = scopeContainer.querySelector('button');
     button.addEventListener('click', toggleButtonSearch);
+    button.disabled = true;
 
     let input = scopeContainer.querySelector('#scope-search > #search-input');
-    let fzsch = new FuzzySearch();
-    input.addEventListener('keyup', function (e) {
-        suggest(e, fzsch);
-    });
+    
+    let poll_aws = window.setInterval(() => {
+        if(window.location.href.indexOf('&') == -1){
+            youtube_url = window.location.href;
+        } else {
+            youtube_url = window.location.href.substring(0, window.location.href.indexOf('&'));
+        }
+        url = 'https://u1pzky3w1b.execute-api.us-east-1.amazonaws.com/v1?url=' + youtube_url
+        fetch(url, {
+            method: 'POST',
+        }).then(function(response){
+            console.log(response);
+            if(response.status == 200){
+                window.clearInterval(poll_aws);
+                response.json().then(function(value){
+
+                    let fzsch = new FuzzySearch(value);
+                    input.addEventListener('keyup', function (e) {
+                        suggest(e, fzsch);
+                    });
+
+                    button.style.opacity = "1";
+                    button.disabled = false;
+
+                });
+            }
+        });
+    }, 3000);
 
     let suggestions_output = scopeContainer.querySelector('#scope-search #search-suggestions');
     suggestions_output.addEventListener('click', function (e) {

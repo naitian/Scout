@@ -18,10 +18,36 @@
     outline: none;
 }
 
+#scope-search > button:disabled {
+    background: #ECE9E6;
+    background: -webkit-linear-gradient(to left, #FFFFFF, #ECE9E6);
+    background: linear-gradient(to left, #FFFFFF, #ECE9E6);
+    border-color: #ECE9E6;
+}
+
+#scope-search > button:hover:not(:disabled):not(.active) {
+    box-shadow: 0 0 4px #000;
+    cursor: pointer;
+}
+
+#scope-search > button.active:hover:not(:disabled) {
+    cursor: pointer;
+}
+
+@-webkit-keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 #scope-search > button.active {
     border-radius: 50px 0 0 50px;
     width: 80px;
     outline: none;
+    box-shadow: none;
 }
 
 #scope-search > input[type=text] {

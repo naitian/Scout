@@ -6,6 +6,8 @@ const init = () => {
 
 const runPipeline = (e) => {
     const button = document.querySelector('#scope-search > button');
+    button.children[0].innerHTML = 'refresh';
+    button.children[0].style.animation = 'rotating 1.5s linear infinite';
     button.removeEventListener('click', runPipeline);
     button.disabled = true;
 
@@ -119,6 +121,8 @@ const addButton = () => {
             if(response.status == 200){
                 button.disabled = false;
                 button.addEventListener('click', toggleButtonSearch);
+                button.children[0].innerHTML = 'search';
+                button.children[0].style.animation = 'none';
                 
                 return response.json()
             } else if(first404) {

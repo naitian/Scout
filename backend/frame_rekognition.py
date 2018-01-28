@@ -22,7 +22,7 @@ def rekognize_objects_in_frame(video_title: str, frame_title: str) -> object:
             'Bytes': frame_raw_bytes
         },
         MaxLabels=25,
-        MinConfidence=50
+        MinConfidence=80
     )
     return response
 

@@ -2,6 +2,7 @@ import boto3
 import frame_rekognition
 import json
 import preprocess
+import sys
 
 def extract_frames_from_video(video_url: str) -> None:
     """Extract frames from video using preprocessor.
@@ -12,7 +13,7 @@ def extract_frames_from_video(video_url: str) -> None:
     preprocess.get_images(video_url)
 
 def get_metadata_of_video(video_url: str) -> tuple:
-    """Retrieves metadata from DynamoDB about video.
+    """Retrieves metadata from DynamoDB about video.    
 
     Args:
         video_url: url of Youtube video.
@@ -77,4 +78,5 @@ def index_video(video_url):
     save_labels(url, title, framerate)
 
 if __name__ == '__main__':
-    index_video('https://www.youtube.com/watch?v=R_Dak_JySMk')
+    assert len(sys.argv) == 2
+    index_video(sys.argv[1])

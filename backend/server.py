@@ -12,7 +12,7 @@ def hello():
     return app.send_static_file('index.html')
 
 
-@app.route("/process")
+@app.route("/process", methods=['POST'])
 def process():
     if request.method == 'POST':
         client = boto3.client("dynamodb")

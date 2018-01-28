@@ -2,7 +2,7 @@
 
 > Find what you want, before you get there.
 
-![Scout Screenshot](https://imgur.com/ZutHO9a.png)
+![Scout Screenshot](https://imgur.com/fRP8MJR.png)
 
 ## What is Scout?
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Scope</title>
+        <style type="text/css" media="screen">
+            body {
+                padding: 0;
+                margin: 0;
+
+                color: white;
+                background: linear-gradient(to right, #8f94fb, #4e54c8);
+                font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+                font-weight: 300;
+                font-size: 18px;
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: 50vw 50vw;
+                grid-template-rows: 33.33vh 33.33vh auto;
+            }
+
+            .container .text {
+                grid-column: 1;
+                grid-row: 2;
+                text-align: center;
+            }
+
+            .text h1 {
+                font-weight: 300;
+                font-size: 4em;
+                margin-top: 8vh;
+                margin-bottom: 0;
+            }
+
+            .text a {
+                color: white;
+                text-decoration: none;
+                text-align: left;
+            }
+
+            .tagline {
+                grid-column: 2;
+                grid-row: 2;
+                text-align: center;
+                line-height: 33vh;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class="text">
+                <h1>Scope</h1>
+                <a href="https://github.com/naitian/scope" target="_blank">Github</a>
+            </div>
+            <div class="tagline">
+                Find what you need, when you need it.
+            </div>
+        </div>
+    </body>
+</html>

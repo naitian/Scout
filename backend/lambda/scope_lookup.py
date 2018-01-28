@@ -11,10 +11,21 @@ def lambda_handler(event: object, context: object) -> str:
     Returns:
         string: json string containing labels or empty if url not indexed.
     """
-    print(event)
-    url = event['queryStringParameters']['url']
-    dynamodb_client = boto3.client('dynamodb')
+    response_payload = {
+        'isBase64Encoded': 'false',
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*'
+        },
+        'body': ''
+    }
     
+    url = event['queryStringParameters']['url']
+    if not url:
+        response_payload['statusCode'] = 404
+        return response_payload
+        
+    dynamodb_client = boto3.client('dynamodb')
     response = dynamodb_client.get_item(
         TableName='index',
         Key={
@@ -23,12 +34,7 @@ def lambda_handler(event: object, context: object) -> str:
             }
         }
     )
-    response_payload = {
-        'isBase64Encoded': 'false',
-        'statusCode': 200,
-        'headers': {},
-        'body': ''
-    }
+    
     if 'Item' in response and 'labels' in response['Item']:
         labels = json.loads(response['Item']['labels']['S'])
         label_objects = []

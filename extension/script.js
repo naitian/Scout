@@ -9,6 +9,12 @@ const toggleButtonSearch = () => {
     const button = document.querySelector('#scope-search > button');
     input.classList.toggle('active');
     button.classList.toggle('active');
+
+    if (!input.classList.contains('active')) {
+        const sug = document.querySelector('#scope-search > #search-suggestions');
+        sug.classList.add('empty');
+        sug.innerHTML = '';
+    }
     input.focus();
 };
 

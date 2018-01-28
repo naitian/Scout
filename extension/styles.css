@@ -89,24 +89,32 @@
 
 #scope-search > #search-suggestions {
     display: grid;
-    width: 160px;
+    width: 180px;
     position: relative;
     left: 79px;
     top: -1px;
     border: 1px solid blue;
-    padding: 10px;
+    padding: 10px 0;
     background-color: #white;
 }
 
 #scope-search .search-results {
     font-size: 12px;
-    padding: 2px 0px;
+    padding: 2px 10px;
+}
+
+#scope-search .search-results:hover {
+    background: #eee;
 }
 
 #scope-search .search-results a {
     color: blue;
     cursor: pointer;
     margin-right: 5px;
+}
+
+#scope-search .search-results a:hover {
+    color: red;
 }
 
 #scope-search .search-results .timestamps {

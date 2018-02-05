@@ -1,7 +1,7 @@
 import boto3
 import os
 
-rekognition_client = boto3.client('rekognition')
+rekognition_client = boto3.client('rekognition', region_name='us-east-1')
 
 
 def rekognize_objects_in_frame(video_title: str, frame_title: str) -> object:
@@ -14,7 +14,7 @@ def rekognize_objects_in_frame(video_title: str, frame_title: str) -> object:
     Returns:
         Rekognition detect labels response.
     """
-    frame_png_filepath = os.path.join('frames', video_title, frame_title)
+    frame_png_filepath = os.path.join('.', 'frames', video_title, frame_title)
 
     frame_raw_bytes = open(frame_png_filepath, 'rb').read()
     response = rekognition_client.detect_labels(
@@ -37,7 +37,7 @@ def list_pngs(video_title: str) -> list:
         List of png file names.
 
     """
-    path_to_pngs = os.path.join('frames', video_title)
+    path_to_pngs = os.path.join('.', 'frames', video_title)
     files = os.listdir(path_to_pngs)
     png_files = [f for f in files if os.path.splitext(f)[1] == '.png']
     png_files = sorted(png_files, key=lambda s: int(s[5:-4]))

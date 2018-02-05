@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import boto3
 import frame_rekognition
 import json
@@ -24,7 +25,7 @@ def get_metadata_of_video(video_url: str) -> tuple:
         video_title: title of folder where video stored.
         video_framerate: frames per second of video.
     """
-    dynamodb_client = boto3.client('dynamodb')
+    dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
     get_item_response = dynamodb_client.get_item(
         TableName='index',
         Key={
@@ -48,7 +49,7 @@ def save_labels(video_url: str, video_title: str, video_framerate: int) -> None:
     labels = frame_rekognition.get_labels_for_video(video_title, video_framerate)
     labels_json = json.dumps(labels)
 
-    dynamodb_client = boto3.client('dynamodb')
+    dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
     update_item_response = dynamodb_client.update_item(
         TableName='index',
         Key={
@@ -74,12 +75,13 @@ def delete_media():
     rmtree('frames/')
     rmtree('videos/')
 
-def index_video(video_url):
+def index_video(event, context):
     """Index labels of Youtube video into DynamoDB.
 
     Args:
         video_url: url of Youtube video.
     """
+    video_url = event['url']
     extract_frames_from_video(video_url)
     url, title, framerate = get_metadata_of_video(video_url)
     save_labels(url, title, framerate)
@@ -87,4 +89,4 @@ def index_video(video_url):
 
 if __name__ == '__main__':
     assert len(sys.argv) == 2
-    index_video(sys.argv[1])
+    index_video({'url': sys.argv[1]}, [])

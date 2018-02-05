@@ -31,7 +31,7 @@ def download_url(url, hook=None):
 
 
 def update_video_index(url, title, framerate):
-    dynamodb_client = boto3.client('dynamodb')
+    dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
     tables_list = dynamodb_client.list_tables()
     if 'index' not in tables_list['TableNames']:
         dynamodb_client.create_table(
@@ -97,6 +97,7 @@ def get_frame_timestamps_stupid(filename):
     path = get_absolute_path(os.path.join('.', 'videos', '{}').format(filename))
     video = cv2.VideoCapture(path)
     fps = int(video.get(cv2.CAP_PROP_FPS))
+    assert fps > 0
     length = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
     video.release()
     return fps, [x for x in range(0, length, fps * 3)]
